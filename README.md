@@ -48,7 +48,8 @@ pro1: process --ck 10ns 마다 0 1 반복하도록 하는 process
 	yulmoo_button <= ‘0’;
 	rtn <= '0', '1' after 335ns,'0' after 355ns;
 ```
-
+- Result of Simulation
+![structure](https://blogfiles.pstatic.net/MjAxOTEyMDZfNDEg/MDAxNTc1NjQxMDk4MTgx.GA9Mlxl_c1QFqlYVBHF5VsYEG5KQawCT_ymvZNl892cg.iWPDjk75ZhO2CLmfEufITFDkZal9fzikTiXv7nxEziwg.JPEG.hdh988/%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%981.jpg?type=w2)
 
 
  - ### Simulation 2
@@ -69,3 +70,5 @@ pro1: process --ck 10ns 마다 0 1 반복하도록 하는 process
 	coffee_button <= '0', '1' after 185ns, '0' after 205ns;
 	rtn <= '0', '1' after 335ns,'0' after 355ns;
 ```
+- Result of Simulation
+![structure](https://blogfiles.pstatic.net/MjAxOTEyMDZfMjY3/MDAxNTc1NjQxMTYyNTQ3.VmGkrhHmdFxZ1AtDaEkJhWx2wZ5SySCsyMp1-75JHMUg.R6bzNLdRAeSrSnVXNpha7GTRlFTqchNF4-dyEju0ubYg.JPEG.hdh988/%EA%B9%83%ED%97%88%EB%B8%8C3.jpg?type=w2)
