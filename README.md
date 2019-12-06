@@ -74,11 +74,11 @@ pro1: process --ck 10ns 마다 0 1 반복하도록 하는 process
 ![structure](https://blogfiles.pstatic.net/MjAxOTEyMDZfMjY3/MDAxNTc1NjQxMTYyNTQ3.VmGkrhHmdFxZ1AtDaEkJhWx2wZ5SySCsyMp1-75JHMUg.R6bzNLdRAeSrSnVXNpha7GTRlFTqchNF4-dyEju0ubYg.JPEG.hdh988/%EA%B9%83%ED%97%88%EB%B8%8C3.jpg?type=w2)
 
 > ## Important Codes
-> 1. [Reset](README.md#carOwnership)
+> 1. [Reset](README.md#Reset)
 >
-> 2. [Returnstate](README.md#carRecordBC)
+> 2. [Returnstate](README.md#Returnstate)
 >
-> 3. [StateOFmoney](README.md#carAccidentBC)
+> 3. [StateOFmoney](README.md#StateOFmoney)
 >
   
   - ### **Reset**  
