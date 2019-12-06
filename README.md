@@ -72,3 +72,136 @@ pro1: process --ck 10ns 마다 0 1 반복하도록 하는 process
 ```
 - Result of Simulation
 ![structure](https://blogfiles.pstatic.net/MjAxOTEyMDZfMjY3/MDAxNTc1NjQxMTYyNTQ3.VmGkrhHmdFxZ1AtDaEkJhWx2wZ5SySCsyMp1-75JHMUg.R6bzNLdRAeSrSnVXNpha7GTRlFTqchNF4-dyEju0ubYg.JPEG.hdh988/%EA%B9%83%ED%97%88%EB%B8%8C3.jpg?type=w2)
+
+> ## Important Codes
+> 1. [Reset](README.md#carOwnership)
+>
+> 2. [Returnstate](README.md#carRecordBC)
+>
+> 3. [StateOFmoney](README.md#carAccidentBC)
+>
+  
+  - ### **Reset**  
+```VHDL 
+process(ck,rst,rtn,coin50,coin100,coin500,paper1000,coffee_button,yulmoo_button)
+
+	variable returncoin50, returncoin100, returncoin500, returnpaper1000, rtnstate2 : integer:=0;
+
+	begin
+	if(rst='1') then
+	state <= s0;
+```
+
+
+프로세스를 시작하는 부분에 RST변수에 대한 if문을 설정하여
+high 신호가 오면 s0으로 보내도록 처리함
+
+  - ### **Returnstate**  
+```VHDL 
+			when rtnstate => coffee_out <= '0';
+							coffee_psb <= '0';
+							yulmoo_out <= '0';
+							yulmoo_psb <= '0';
+							rtn50 <= '0';
+							rtn100 <= '0';
+							rtn500 <= '0';
+							rtn1000 <= '0';		 		  
+							
+							if(returncoin50>0) then 	
+								state <= rtns50;
+							
+							elsif(returncoin100>0) then	
+								state <= rtns100;
+							
+							elsif(returncoin500>0) then	
+								state <= rtns500;
+							
+							elsif(returnpaper1000>0) then
+								state <= rtns1000;
+							
+							else state <= s0;		
+										  
+							end if;	
+							
+							
+						when rtns50 => coffee_out <= '0';
+							coffee_psb <= '0';
+							yulmoo_out <= '0';
+							yulmoo_psb <= '0';
+							returncoin50 := returncoin50-1;	
+							state <= rtnstate;		
+							rtn50 <= '1';			
+															  
+						when rtns100 => coffee_out <= '0';
+							coffee_psb <= '0';
+							yulmoo_out <= '0';
+							yulmoo_psb <= '0';
+							returncoin100 := returncoin100-1;
+							state <= rtnstate;			
+							rtn100 <= '1';		  
+						
+						when rtns500 => coffee_out <= '0';
+							coffee_psb <= '0';
+							yulmoo_out <= '0';
+							yulmoo_psb <= '0';
+							returncoin500 := returncoin500-1;	
+							state <= rtnstate;			
+							rtn500 <= '1';	
+						
+						when rtns1000 => coffee_out <= '0';
+							coffee_psb <= '0';
+							yulmoo_out <= '0';
+							yulmoo_psb <= '0';
+							returnpaper1000 := returnpaper1000-1;	
+							state <= rtnstate;			
+							rtn1000 <= '1';				
+```
+
+Return에 1이 입력되면 rtnstate로 보내져 return 을 실행하는데
+returncoin50, 100, 500, 1000에 들어있는 숫자만큼 모두 반환하는 코드
+
+
+  - ### **StateOFmoney**  
+  각 금액별 state가 있지만 900원을 예로 설명하겠습니다.
+  
+```VHDL 
+	when s900 => coffee_out <= '0';
+								coffee_psb <= '1'; -- 커피 버튼에 불 들어옴
+								yulmoo_out <= '0';
+								yulmoo_psb <= '1'; -- 율무 버튼에 불 들어옴	
+								returncoin50 := 0;
+								returncoin100 := 4; -- 반환해야하는 100원 수 
+								returncoin500 := 1; -- 반환해야하는 500원 수
+								returnpaper1000 := 0;
+								
+									if(coin50 = '1') then 
+										state <= s950; -- 50원 추가되면 950원 됨
+							
+									elsif(coin100 = '1') then
+										state <= s1000; -- 100원 추가되면 1000원 됨
+							
+									elsif(coin500 = '1') then
+										returncoin500 := 2; -- 500원 추가되면 1400원 되서 반환해야함
+										state <= rtnstate;
+							
+									elsif(paper1000 = '1') then															
+										returnpaper1000 := 1;-- 1000원 추가되면 1900원되서 반환해야함
+										state <= rtnstate;
+							 
+									elsif(rtn = '1') then	
+										state <= rtnstate;
+									
+									elsif(yulmoo_button = '1') then
+										state <= s750;
+										yulmoo_out <= '1';
+									
+									elsif(coffee_button = '1') then
+										state <= s700;
+										coffee_out <= '1';
+									
+									else state <= s950;
+										  
+									end if;
+
+```
+
