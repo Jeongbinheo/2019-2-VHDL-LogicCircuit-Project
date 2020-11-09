@@ -1,7 +1,9 @@
 # Beverage Vending Machine
 > ## Introduction
   
-This repository has VHDL-codes for the term-project of Digital Logic Circuit Design which was proceeded during 2019-2.
+This repository has VHDL-codes for the term-project of Digital Logic Circuit Design 
+
+which was proceeded during 2019-2.
 
 The codes are written for realizing simple Beverage Vending Machine through using FSM skill.
 
